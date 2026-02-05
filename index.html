@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Valentine 💖</title>
+  <title>Action-packed</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -99,7 +99,7 @@
 </head>
 <body>
 
-  <h1 id="question">Kariuki, will you be my Valentine? 💘</h1>
+  <h1 id="question">Marsden, will you be my Valentine? </h1>
 
   <div class="buttons" id="buttons">
     <button id="yesBtn">Yes 💖</button>
@@ -135,7 +135,6 @@
     yesScale += 0.1;
     yesBtn.style.transform = `scale(${yesScale})`;
   });
-
   yesBtn.addEventListener('click', () => {
     question.classList.add('hidden');
     buttons.classList.add('hidden');
@@ -146,7 +145,7 @@
   });
 
   function typeMessage() {
-    const text = "You just made me the happiest girl alive 💕.\nI love you Papii. ❤️";
+    const text = "You just made me the happiest sister alive 💕.\nI love you bro. ❤️";
     let i = 0;
     message.textContent = '';
 
@@ -158,7 +157,7 @@
   }
 
   function spawnEmojis() {
-    const emojis = ['💖','💕','❤️','🎉','✨','💘'];
+    const emojis = ['💖','💕','❤️','🎉','✨','💘','🎆','🥳','🥳'];
     setInterval(() => {
       const span = document.createElement('span');
       span.className = 'emoji';
