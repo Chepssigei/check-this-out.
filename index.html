@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine 💖</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 120px;
+      position: relative;
+      z-index: 10;
+    }
+
+    button {
+      font-size: 1.6rem;
+      padding: 18px 40px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background: #444;
+      color: white;
+      position: fixed; /* IMPORTANT: keeps it visible everywhere */
+      left: 50%;
+      top: 60%;
+      transform: translateX(100px);
+    }
+
+    .hidden { display: none; }
+
+    #celebration {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #yeeey {
+      font-size: 4rem;
+      animation: pop 2s ease forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.5); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    #message {
+      margin-top: 40px;
+      font-size: 2rem;
+      font-style: italic;
+      white-space: pre-wrap;
+      text-align: center;
+    }
+
+    .emoji {
+      position: fixed;
+      font-size: 2rem;
+      animation: float 3s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="question">Kariuki, will you be my Valentine? 💘</h1>
+
+  <div class="buttons" id="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😢</button>
+  </div>
+
+  <div id="celebration">
+    <div id="yeeey">YEEEY! 🎉💖</div>
+    <div id="message"></div>
+  </div>
+
+<script>
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
+  const question = document.getElementById('question');
+  const buttons = document.getElementById('buttons');
+  const celebration = document.getElementById('celebration');
+  const message = document.getElementById('message');
+
+  function moveNoButton() {
+    const padding = 80;
+    const x = Math.random() * (window.innerWidth - padding);
+    const y = Math.random() * (window.innerHeight - padding);
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+  }
+
+  noBtn.addEventListener('mouseenter', moveNoButton);
+  noBtn.addEventListener('mousemove', moveNoButton);
+
+  let yesScale = 1;
+  noBtn.addEventListener('mouseenter', () => {
+    yesScale += 0.1;
+    yesBtn.style.transform = `scale(${yesScale})`;
+  });
+
+  yesBtn.addEventListener('click', () => {
+    question.classList.add('hidden');
+    buttons.classList.add('hidden');
+    celebration.style.display = 'flex';
+
+    setTimeout(typeMessage, 2000);
+    spawnEmojis();
+  });
+
+  function typeMessage() {
+    const text = "You just made me the happiest girl alive 💕.\nI love you Papii. ❤️";
+    let i = 0;
+    message.textContent = '';
+
+    const interval = setInterval(() => {
+      message.textContent += text[i];
+      i++;
+      if (i === text.length) clearInterval(interval);
+    }, 80);
+  }
+
+  function spawnEmojis() {
+    const emojis = ['💖','💕','❤️','🎉','✨','💘'];
+    setInterval(() => {
+      const span = document.createElement('span');
+      span.className = 'emoji';
+      span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      span.style.left = Math.random()*100 + 'vw';
+      document.body.appendChild(span);
+      setTimeout(() => span.remove(), 3000);
+    }, 200);
+  }
+</script>
+
+</body>
+</html>
